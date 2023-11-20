@@ -1,31 +1,31 @@
 /*
-Estudiante: Sebasti·n Landaeta
-CÈdula: 28.240.979
-Carrera: IngenierÌa Inform·tica
-Materia: TÈcnicas de ProgramaciÛn II
-SecciÛn: 1
+Estudiante: Sebasti√°n Landaeta
+C√©dula: 28.240.979
+Carrera: Ingenier√≠a Inform√°tica
+Materia: T√©cnicas de Programaci√≥n II
+Secci√≥n: 1
 
-Un proyecto logrado gracias a Miguel Angel Rosas Ocampos, cuyo cÛdigo fuente se usÛ como base para realizar este Buscaminas en C.
+Un proyecto logrado gracias a Miguel Angel Rosas Ocampos, cuyo c√≥digo fuente se us√≥ como base para realizar este Buscaminas en C.
 
 Canal de Miguel: https://www.youtube.com/channel/UCA0OK6M_H7HgqwzckPeNMyg
 Perfil de Github de Miguel: https://github.com/MiguelAngelRosasOcampo
-CÛdigo fuente original: https://github.com/MiguelAngelRosasOcampo/Buscaminas/blob/main/buscaminas.c
+C√≥digo fuente original: https://github.com/MiguelAngelRosasOcampo/Buscaminas/blob/main/buscaminas.c
 */
 
-//LibrerÌas a utilizar.
+//Librer√≠as a utilizar.
 #include <stdio.h>
 #include <stdlib.h>
 
 #define CLEAR() system("cls") //Si desea compilar en un sistema operativo UNIX, cambie "system("cls")" por "system("clear")" 
 
-void configuracion_del_juego(); //Permite al jugador elegir la dificultad, y se configurar· el juego en funciÛn de eso.
-void colocar_indicador(char*, short int, short int); //Coloca en un bloque el n˙mero de minas que hay a su alrededor.
+void configuracion_del_juego(); //Permite al jugador elegir la dificultad, y se configurar√° el juego en funci√≥n de eso.
+void colocar_indicador(char*, short int, short int); //Coloca en un bloque el n√∫mero de minas que hay a su alrededor.
 void juego(char*, char*, short int, short int, short int); //Contiene todo lo referente al gameplay.
 void generar_tablero(char*, short int, short int); //Como su nombre lo indica, genera el tablero de juego.
 
-int main() //FunciÛn principal
+int main() //Funci√≥n principal
 {
-	char opcion; //"opcion" almacenar· la opciÛn del men˙ que elija el jugador.
+        char opcion; //"opcion" almacenar√° la opci√≥n del men√∫ que elija el jugador.
 	srand(time(NULL)); //Semilla.
 	
 	do
@@ -34,12 +34,12 @@ int main() //FunciÛn principal
 		
 		//Interfaz de usuario
 		printf("########  ##     ##  ######   ######     ###    ##     ## #### ##    ##    ###     ######\n");
-        printf("##     ## ##     ## ##    ## ##    ##   ## ##   ###   ###  ##  ###   ##   ## ##   ##    ##\n");
-        printf("##     ## ##     ## ##       ##        ##   ##  #### ####  ##  ####  ##  ##   ##  ##\n");
-        printf("########  ##     ##  ######  ##       ##     ## ## ### ##  ##  ## ## ## ##     ##  ######\n");
-        printf("##     ## ##     ##       ## ##       ######### ##     ##  ##  ##  #### #########       ##\n");
-        printf("##     ## ##     ## ##    ## ##    ## ##     ## ##     ##  ##  ##   ### ##     ## ##    ##\n");
-        printf("########   #######   ######   ######  ##     ## ##     ## #### ##    ## ##     ##  ######\n\n");
+                printf("##     ## ##     ## ##    ## ##    ##   ## ##   ###   ###  ##  ###   ##   ## ##   ##    ##\n");
+                printf("##     ## ##     ## ##       ##        ##   ##  #### ####  ##  ####  ##  ##   ##  ##\n");
+                printf("########  ##     ##  ######  ##       ##     ## ## ### ##  ##  ## ## ## ##     ##  ######\n");
+                printf("##     ## ##     ##       ## ##       ######### ##     ##  ##  ##  #### #########       ##\n");
+                printf("##     ## ##     ## ##    ## ##    ## ##     ## ##     ##  ##  ##   ### ##     ## ##    ##\n");
+                printf("########   #######   ######   ######  ##     ## ##     ## #### ##    ## ##     ##  ######\n\n");
 		
 		printf("j) Jugar.\n");
 		printf("s) Salir.\n\n");
@@ -47,28 +47,28 @@ int main() //FunciÛn principal
 		printf("Ingrese una opci%cn: ", 162);
 		scanf("%c", &opcion);
 
-		if(opcion == 'j' || opcion == 'J')
+		if (opcion == 'j' || opcion == 'J')
 		{
-			configuracion_del_juego(); //Una vez elegida la opciÛn de jugar, se procede a configurar el juego.
+			configuracion_del_juego(); //Una vez elegida la opci√≥n de jugar, se procede a configurar el juego.
 		}
 		
 	} while(opcion != 's' && opcion != 'S'); 
-	//Si el jugador inserta un caracter que no est· asociado a las opciones disponibles, este bucle le permitir· elegir de nuevo.
+	//Si el jugador inserta un caracter que no est√° asociado a las opciones disponibles, este bucle le permitir√° elegir de nuevo.
 	
 	return 0;
-} //Fin de la funciÛn principal.
+} //Fin de la funci√≥n principal.
 
-void configuracion_del_juego() //Comienzo de la funciÛn "configuracion_del_juego()".
+void configuracion_del_juego() //Comienzo de la funci√≥n "configuracion_del_juego()".
 {
 	char *tablero_nm, *tablero_jugador, nivel;
 	short int filas, columnas, i, minas, posicion_de_mina;
 	
-	//"tablero_nm" Es el tablero en el que se van a almacenar las minas y el n˙mero de minas que hay a los alrededores de cada bloque.
-	//"tablero_jugador" Es el tablero que ver· el jugador.
-	//"nivel" Es la variable que almacenar· la dificultad que escoja el jugador.
-	//"filas" y "columnas" Son las variables que almacenar·n las dimensiones del tablero.
-	//"minas" Almacenar· el n˙mero de minas que habr· en el tablero.
-	//"posicion_de_mina" Almacenar· el lugar del tablero en el que se encuentre una mina.
+	//"tablero_nm" Es el tablero en el que se van a almacenar las minas y el n√∫mero de minas que hay a los alrededores de cada bloque.
+	//"tablero_jugador" Es el tablero que ver√° el jugador.
+	//"nivel" Es la variable que almacenar√° la dificultad que escoja el jugador.
+	//"filas" y "columnas" Son las variables que almacenar√°n las dimensiones del tablero.
+	//"minas" Almacenar√° el n√∫mero de minas que habr√° en el tablero.
+	//"posicion_de_mina" Almacenar√° el lugar del tablero en el que se encuentre una mina.
 	//"i" Solo es un inicializador para ciclos.
 	
 	do
@@ -85,24 +85,24 @@ void configuracion_del_juego() //Comienzo de la funciÛn "configuracion_del_juego
 		scanf("%c", &nivel);
 	
 	} while(nivel != 'a' && nivel != 'A' && nivel != 'b' && nivel != 'B' && nivel != 'c' && nivel != 'C');
-	//Si el jugador inserta un caracter que no est· asociado a las opciones disponibles, este bucle le permitir· elegir de nuevo.
+	//Si el jugador inserta un caracter que no est√° asociado a las opciones disponibles, este bucle le permitir√° elegir de nuevo.
 	
 	if (nivel == 'a' || nivel == 'A')
 	{
-		minas = 2 + (filas = columnas = 8); //Minas y dimensiones del tablero en la dificultad f·cil.
+		minas = 2 + (filas = columnas = 8); //Minas y dimensiones del tablero en la dificultad f√°cil.
 	}
 	
-	else if(nivel == 'b' || nivel == 'B')
+	else if (nivel == 'b' || nivel == 'B')
 	{
 		minas = 24 + (filas = columnas = 16); //Minas y dimensiones del tablero en la dificultad intermedio.
 	}
 		
-	else if(nivel == 'c' || nivel == 'C')
+	else if (nivel == 'c' || nivel == 'C')
 	{
 		minas = 69 + (columnas = 14 + (filas = 16)); //Minas y dimensiones del tablero en la dificultad experto.
 	}
 	
-	tablero_nm = (char*)malloc(sizeof(char)*filas*columnas); //Se reserva el espacio en memoria que necesitar· el vector "tablero_nm".
+	tablero_nm = (char*)malloc(sizeof(char)*filas*columnas); //Se reserva el espacio en memoria que necesitar√° el vector "tablero_nm".
 	
 	if (!tablero_nm) //Si no se puede reservar el espacio, el programa se cierra.
 	{
@@ -110,7 +110,7 @@ void configuracion_del_juego() //Comienzo de la funciÛn "configuracion_del_juego
 		exit(-1);
 	}
 		
-	tablero_jugador = (char*)malloc(sizeof(char)*filas*columnas); //Se reserva el espacio en memoria que necesitar· el vector "tablero_jugador".
+	tablero_jugador = (char*)malloc(sizeof(char)*filas*columnas); //Se reserva el espacio en memoria que necesitar√° el vector "tablero_jugador".
 	
 	if (!tablero_jugador) //Si no se puede reservar el espacio, el programa se cierra.
 	{
@@ -130,9 +130,9 @@ void configuracion_del_juego() //Comienzo de la funciÛn "configuracion_del_juego
 
 		if (*(tablero_nm + posicion_de_mina) != '0') //Verifica que NO haya una mina ya puesta.
 		{
-			*(tablero_nm + posicion_de_mina) = '0'; //En esa posiciÛn se coloca un '0' (mina).
+			*(tablero_nm + posicion_de_mina) = '0'; //En esa posici√≥n se coloca un '0' (mina).
 			
-			//En todos estos casos, se llama a la funciÛn "colocar_indicador()" para que indique en la tabla el n˙mero de minas que habr· alrededor de cada casilla que no contenga mina.
+			//En todos estos casos, se llama a la funci√≥n "colocar_indicador()" para que indique en la tabla el n√∫mero de minas que habr√° alrededor de cada casilla que no contenga mina.
 			if ((posicion_de_mina+1)%columnas && *(tablero_nm + (posicion_de_mina+1)) != '0')
 				colocar_indicador(tablero_nm, posicion_de_mina, -1); //Se manda con - para que sea +		
 			
@@ -157,16 +157,16 @@ void configuracion_del_juego() //Comienzo de la funciÛn "configuracion_del_juego
 			if (posicion_de_mina>=columnas && (posicion_de_mina+1)%columnas && *(tablero_nm + (posicion_de_mina - columnas + 1)) != '0')
 				colocar_indicador(tablero_nm, posicion_de_mina, columnas-1); 
 		}			
-		else --i; //Si ya habÌa un '0' en esa posiciÛn, se vuelve a repetir la iteraciÛn.
+		else --i; //Si ya hab√≠a un '0' en esa posici√≥n, se vuelve a repetir la iteraci√≥n.
 	}
 	
 	juego(tablero_nm, tablero_jugador, filas, columnas, minas); //Configurado ya el juego, se procede a jugar.
 	
-	free(tablero_nm); //Como los tableros son vectores din·micos, hay que liberar espacio una vez se terminan de usar.
+	free(tablero_nm); //Como los tableros son vectores din√°micos, hay que liberar espacio una vez se terminan de usar.
 	free(tablero_jugador);	
-} //Fin de la funciÛn "configuraciÛn_de_juego".
+} //Fin de la funci√≥n "configuraci√≥n_de_juego".
 
-void colocar_indicador(char *tablero_nm, short int posicion_de_mina, short int posicion_indicador) //Comienzo de la funciÛn "colocar_indicador()". 
+void colocar_indicador(char *tablero_nm, short int posicion_de_mina, short int posicion_indicador) //Comienzo de la funci√≥n "colocar_indicador()". 
 {
 	if (*(tablero_nm + posicion_de_mina - posicion_indicador) == 32)
 	{
@@ -200,18 +200,18 @@ void colocar_indicador(char *tablero_nm, short int posicion_de_mina, short int p
 	{
 		*(tablero_nm + posicion_de_mina - posicion_indicador) = '8';
 	}
-} //Fin de la funciÛn "colocar_indicador()". 
+} //Fin de la funci√≥n "colocar_indicador()". 
 
-void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int columnas, short int minas) //Comienzo de la funciÛn "juego()"
+void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int columnas, short int minas) //Comienzo de la funci√≥n "juego()"
 {
 	char comando, columna_usuario;
 	short int i, j, turno = 0, banderas = minas, ganar;
 	
-	//"comando" Almacenar· el comando ingresado por el jugador.
-	//Cuando el jugador quiera interactuar con una casilla, la coordenada de la fila y la coordenada de la columna se almacenar·n en "j" y "columna_usuario", respectivamente.
-	//"turno" Almacenar· el turno en el que se encuentre el jugador.
-	//"banderas" Almacenar· el n˙mero de bander·s que tendr· el usuario. El n˙mero de banderas siempre es igual al n˙mero de minas que hay en el tablero.
-	//"ganar" Es una variable que se iniciar· en "0", y ser· "1" si el jugador gana la partida.
+	//"comando" Almacenar√° el comando ingresado por el jugador.
+	//Cuando el jugador quiera interactuar con una casilla, la coordenada de la fila y la coordenada de la columna se almacenar√°n en "j" y "columna_usuario", respectivamente.
+	//"turno" Almacenar√° el turno en el que se encuentre el jugador.
+	//"banderas" Almacenar√° el n√∫mero de bander√°s que tendr√° el usuario. El n√∫mero de banderas siempre es igual al n√∫mero de minas que hay en el tablero.
+	//"ganar" Es una variable que se iniciar√° en "0", y ser√° "1" si el jugador gana la partida.
 	//"i" Solo es un inicializador para bucles.
 	do
 	{
@@ -219,7 +219,7 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 		
 		ganar = 0;
 		printf("\n\tTurno: %3hd    Minas:%3hd    Banderas disponibles:%3hd\n\n", turno++, minas, banderas);
-		generar_tablero(tablero_jugador, filas, columnas); //Se llama a la funciÛn "generar_tablero" para dibujar el tablero en pantalla.
+		generar_tablero(tablero_jugador, filas, columnas); //Se llama a la funci√≥n "generar_tablero" para dibujar el tablero en pantalla.
 		
 		printf("\n    COMANDOS    L (Abrir casilla)    B (Poner/Quitar bandera)    S (Salir)\n"); //Comandos disponibles al momento de jugar.
 		printf("\n\t\tIngrese un comando: ");
@@ -231,20 +231,20 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 			printf("Ingrese la fila y la columna (Ejemplo 1,A): ");
 			scanf("%hd,%c%*c", &j, &columna_usuario);
 			
-			if (columna_usuario >= 97 && columna_usuario <= 122) //Para que "columna_usuario" siempre sea una letra may˙scula, aunque el jugador la escriba en min˙scula.
+			if (columna_usuario >= 97 && columna_usuario <= 122) //Para que "columna_usuario" siempre sea una letra may√∫scula, aunque el jugador la escriba en min√∫scula.
 			{
 				columna_usuario -= 32;
 			}
 			
 			if (j > 0 && j <= filas && columna_usuario-65 >= 0 && columna_usuario-65 < columnas) //Verifica las coordenadas ingresadas.
 			{
-				if (comando == 'l' || comando == 'L') //Si el jugador decidiÛ abrir una casilla...
+				if (comando == 'l' || comando == 'L') //Si el jugador decidi√≥ abrir una casilla...
 				{
-					if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)] == '0' && tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] != 'P') //Si en la coordenada que escribiÛ el usuario hay una mÌna y no hay bandera...
+					if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)] == '0' && tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] != 'P') //Si en la coordenada que escribi√≥ el usuario hay una m√≠na y no hay bandera...
 					{
 						CLEAR();
 						
-						for (i = 0; i < filas*columnas; i++) //Revisa los lugares del tablero en el que hay minas '0' y las cambia por el caracter '§', el cual se mostrar· para indicar en dÛnde estaban las minas.
+						for (i = 0; i < filas*columnas; i++) //Revisa los lugares del tablero en el que hay minas '0' y las cambia por el caracter '¬§', el cual se mostrar√° para indicar en d√≥nde estaban las minas.
 						{
 							if (*(tablero_nm+i) == '0')
 							{
@@ -254,65 +254,65 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 					    
 						printf("\n\n\n");
 						generar_tablero(tablero_nm, filas, columnas); //Se genera el tablero con los lugares en donde estaban las minas.
-						printf("\n\t\tHa perdido."); //Si el jugador pierde, el programa lo indicar·, y mostrar· el turno en el que perdiÛ, las minas que habÌan, y la ˙ltima coordenada ingresada.
+						printf("\n\t\tHa perdido."); //Si el jugador pierde, el programa lo indicar√°, y mostrar√° el turno en el que perdi√≥, las minas que hab√≠an, y la √∫ltima coordenada ingresada.
 						printf("\n\nTurno: %2hd\tMinas: %2hd", turno, minas);
 						printf("\t%cltima coordenada ingresada: %hd,%c\n\n", 233, j, columna_usuario);
 						
-						getchar(); //Finalmente, el programa esperar· que el jugador presione una tecla para regresarlo al men˙.
+						getchar(); //Finalmente, el programa esperar√° que el jugador presione una tecla para regresarlo al men√∫.
 						comando = 's';	
 					}
 					
-					else if (tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] != 'P') //Si en la coordenada que escribiÛ el usuario no hay una mina y tampoco una bandera...
+					else if (tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] != 'P') //Si en la coordenada que escribi√≥ el usuario no hay una mina y tampoco una bandera...
 					{
-						tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] = tablero_nm[(columnas*(j-1))+(columna_usuario-65)]; //Se le mostrar· al jugador lo que hay en la casilla que abriÛ.				
+						tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] = tablero_nm[(columnas*(j-1))+(columna_usuario-65)]; //Se le mostrar√° al jugador lo que hay en la casilla que abri√≥.				
 						
 						i = 0; //Se inicia un contador.
 						
-						while( ((columnas*(j-1))+(columna_usuario-65)+i) < (filas*columnas) - 1) //Mientras la posiciÛn que ingresÛ el usuario sea menor que el n˙mero de posiciones que hay en toda la tabla...
+						while( ((columnas*(j-1))+(columna_usuario-65)+i) < (filas*columnas) - 1) //Mientras la posici√≥n que ingres√≥ el usuario sea menor que el n√∫mero de posiciones que hay en toda la tabla...
 						{
-							++i; //Se incrementa el contador para que empiece en la posiciÛn siguiente a la ingresada por el usuario
+							++i; //Se incrementa el contador para que empiece en la posici√≥n siguiente a la ingresada por el usuario
 							if(tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i] == ' ')//Si en la posicion ingresada por el usuario +i, del tablero de los numeros y minas, hay un espacio vacio...
 							{
-							    tablero_jugador[(columnas*(j-1))+(columna_usuario-65)+i] = ' '; //Se le mostrar· al usuario ese espacio vacÌo.
+							    tablero_jugador[(columnas*(j-1))+(columna_usuario-65)+i] = ' '; //Se le mostrar√° al usuario ese espacio vac√≠o.
 							}		
 							else break;	
 						}
 						
-						if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i] != '0' && tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i-1] == ' ') //Si en la posiciÛn ingresada por el usuario +i, del tablero de los n˙meros y minas, no hay mina y en la posiciÛn anterior a esa hay un espacio vacÌo...
-							tablero_jugador[(columnas*(j-1))+(columna_usuario-65)+i] = tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i]; //Al jugador se le mostrar· ese espacio vacio
+						if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i] != '0' && tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i-1] == ' ') //Si en la posici√≥n ingresada por el usuario +i, del tablero de los n√∫meros y minas, no hay mina y en la posici√≥n anterior a esa hay un espacio vac√≠o...
+							tablero_jugador[(columnas*(j-1))+(columna_usuario-65)+i] = tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i]; //Al jugador se le mostrar√° ese espacio vacio
 				        
 						i = 0; //El contador se reinicia
-						while (((columnas*(j-1))+(columna_usuario-65)+i) >= 1) //Mientras la posiciÛn ingresada por el usuario +i sea mayor o igual a 1...
+						while (((columnas*(j-1))+(columna_usuario-65)+i) >= 1) //Mientras la posici√≥n ingresada por el usuario +i sea mayor o igual a 1...
 						{
-							++i; //Se incrementa el contador para que empiece en la posiciÛn siguiente a la ingresada por el usuario.
-							if(tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i] == ' ') //Si en esa posiciÛn hay un espacio vacÌo...
+							++i; //Se incrementa el contador para que empiece en la posici√≥n siguiente a la ingresada por el usuario.
+							if(tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i] == ' ') //Si en esa posici√≥n hay un espacio vac√≠o...
 							{ 
-								tablero_jugador[(columnas*(j-1))+(columna_usuario-65)-i] = ' '; //Se le mostrar· al jugador ese espacio vacÌo.
+								tablero_jugador[(columnas*(j-1))+(columna_usuario-65)-i] = ' '; //Se le mostrar√° al jugador ese espacio vac√≠o.
 						    }
 							else break;
 						}
 					
-						if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i] != '0' && tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i+1] == ' ') //Si en la posiciÛn anterior a la ingresa por el usuario +i no hay una mina y en la posiciÛn siguiente hay un espacio vacÌo...
+						if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i] != '0' && tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i+1] == ' ') //Si en la posici√≥n anterior a la ingresa por el usuario +i no hay una mina y en la posici√≥n siguiente hay un espacio vac√≠o...
 						{
-							tablero_jugador[(columnas*(j-1))+(columna_usuario-65)-i] = tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i]; //Se le muestra al usuario ese espacio vacÌo.
+							tablero_jugador[(columnas*(j-1))+(columna_usuario-65)-i] = tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i]; //Se le muestra al usuario ese espacio vac√≠o.
 						}
 					}
 				}
-				else if (comando == 'b' || comando == 'b') //Si el jugador decidiÛ colocar o quitar una bandera...
+				else if (comando == 'b' || comando == 'b') //Si el jugador decidi√≥ colocar o quitar una bandera...
 				{
-					if ((tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] != 'P') && banderas) //Si en la posiciÛn que ingresÛ el usuario no hay una bandera..
+					if ((tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] != 'P') && banderas) //Si en la posici√≥n que ingres√≥ el usuario no hay una bandera..
 					{
-						tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] = 'P'; //Se coloca la bandera y se decrementa el n˙mero de banderas totales que hay.
+						tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] = 'P'; //Se coloca la bandera y se decrementa el n√∫mero de banderas totales que hay.
 						--banderas;
 					}
-					else if(tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] == 'P') //Si en la posiciÛn que ingresaste ya hay una bandera...
+					else if(tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] == 'P') //Si en la posici√≥n que ingresaste ya hay una bandera...
 					{
-						tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] = 219; //La quita y se incrementa el n˙mero de banderas total.
+						tablero_jugador[(columnas*(j-1))+(columna_usuario-65)] = 219; //La quita y se incrementa el n√∫mero de banderas total.
 						++banderas;
 					}
 				}
 				
-				for (i = 0; i < filas*columnas; i++) //Despues de cada iteraciÛn, se revisar· el tablero para ver si el jugador ya ganÛ, y de ser asÌ, la variable "ganas" pasa a ser "1" y se muestra el mensaje de victoria.
+				for (i = 0; i < filas*columnas; i++) //Despues de cada iteraci√≥n, se revisar√° el tablero para ver si el jugador ya gan√≥, y de ser as√≠, la variable "ganas" pasa a ser "1" y se muestra el mensaje de victoria.
 				{
 					if (tablero_jugador[i] == 'P' && tablero_nm[i] == '0')
 					{
@@ -320,7 +320,7 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 					}
 				}
 			}
-			else //Estas instrucciones se ejecutan si el jugador inserta coordenadas no v·lidas.
+			else //Estas instrucciones se ejecutan si el jugador inserta coordenadas no v√°lidas.
 			{
 				printf("\t\t\t\tFuera del rango.");
 				getchar();
@@ -351,18 +351,18 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 			}
 		}
 			
-		generar_tablero(tablero_nm, filas, columnas); //Finalmente, cuando el jugador gana se le muestra el tablero con las minas y se espera a que presione una tecla para regresarlo al men˙.
+		generar_tablero(tablero_nm, filas, columnas); //Finalmente, cuando el jugador gana se le muestra el tablero con las minas y se espera a que presione una tecla para regresarlo al men√∫.
 		getch();
 	}
-} //Fin de la funciÛn "juego()".
+} //Fin de la funci√≥n "juego()".
 
-void generar_tablero(char *tablero_jugador, short int filas, short int columnas) //Conmienzo de la funciÛn "generar_tablero()".
+void generar_tablero(char *tablero_jugador, short int filas, short int columnas) //Conmienzo de la funci√≥n "generar_tablero()".
 {
 	short int i, j, k, l = 0, m = 1;
 	char letra = 'A';
 	
-	//En esta funciÛn no hay mucho que destacar en cuanto a variables, porque casi todas son contadores o inicializadores de bucles.
-	//Sin embargo, se puede destacar la variable "letra", la cual empezar· en "A" y sirve para colocar las letras que representar·n a cada columna en la tabla que ver· el usuario.
+	//En esta funci√≥n no hay mucho que destacar en cuanto a variables, porque casi todas son contadores o inicializadores de bucles.
+	//Sin embargo, se puede destacar la variable "letra", la cual empezar√° en "A" y sirve para colocar las letras que representar√°n a cada columna en la tabla que ver√° el usuario.
 	
 	printf("\t\t");
 	
@@ -420,4 +420,4 @@ void generar_tablero(char *tablero_jugador, short int filas, short int columnas)
 			printf("\b%c\n", 188); //Esquina inferior derecha.
 		}
 	}
-} //Fin de la funciÛn "generar_tablero()".
+} //Fin de la funci√≥n "generar_tablero()".
