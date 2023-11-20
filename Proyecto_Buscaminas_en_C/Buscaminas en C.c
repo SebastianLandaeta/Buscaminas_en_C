@@ -156,7 +156,7 @@ void configuracion_del_juego() //Comienzo de la función "configuracion_del_jueg
 	
 			if (posicion_de_mina>=columnas && (posicion_de_mina+1)%columnas && *(tablero_nm + (posicion_de_mina - columnas + 1)) != '0')
 				colocar_indicador(tablero_nm, posicion_de_mina, columnas-1); 
-		}			
+		}	
 		else --i; //Si ya había un '0' en esa posición, se vuelve a repetir la iteración.
 	}
 	
@@ -250,7 +250,7 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 							{
 								*(tablero_nm+i) = 207;
 							}
-					    }
+					        }
 					    
 						printf("\n\n\n");
 						generar_tablero(tablero_nm, filas, columnas); //Se genera el tablero con los lugares en donde estaban las minas.
@@ -271,7 +271,7 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 						while( ((columnas*(j-1))+(columna_usuario-65)+i) < (filas*columnas) - 1) //Mientras la posición que ingresó el usuario sea menor que el número de posiciones que hay en toda la tabla...
 						{
 							++i; //Se incrementa el contador para que empiece en la posición siguiente a la ingresada por el usuario
-							if(tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i] == ' ')//Si en la posicion ingresada por el usuario +i, del tablero de los numeros y minas, hay un espacio vacio...
+							if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)+i] == ' ')//Si en la posicion ingresada por el usuario +i, del tablero de los numeros y minas, hay un espacio vacio...
 							{
 							    tablero_jugador[(columnas*(j-1))+(columna_usuario-65)+i] = ' '; //Se le mostrará al usuario ese espacio vacío.
 							}		
@@ -285,10 +285,10 @@ void juego(char *tablero_nm, char* tablero_jugador, short int filas, short int c
 						while (((columnas*(j-1))+(columna_usuario-65)+i) >= 1) //Mientras la posición ingresada por el usuario +i sea mayor o igual a 1...
 						{
 							++i; //Se incrementa el contador para que empiece en la posición siguiente a la ingresada por el usuario.
-							if(tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i] == ' ') //Si en esa posición hay un espacio vacío...
+							if (tablero_nm[(columnas*(j-1))+(columna_usuario-65)-i] == ' ') //Si en esa posición hay un espacio vacío...
 							{ 
 								tablero_jugador[(columnas*(j-1))+(columna_usuario-65)-i] = ' '; //Se le mostrará al jugador ese espacio vacío.
-						    }
+						        }
 							else break;
 						}
 					
